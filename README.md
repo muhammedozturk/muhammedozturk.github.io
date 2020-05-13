@@ -1,1 +1,0 @@
-# muhammedozturk.github.io
