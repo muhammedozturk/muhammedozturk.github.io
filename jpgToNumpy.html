@@ -75,7 +75,26 @@ for myFile in files:</br>
     X_array.append(np.array(X_data))	</br>
 <img class="img-responsive" src="output.png" alt="">
 </li>
+<li>
+	 The picture folder view is as follows:
+	 </br>
+<img class="img-responsive" src="imageFolder.png" alt="">
+</li>
+<li>
+	The following lines are added so that the converted images can be saved in .txt and .npy formats. The .txt file is as follows. The files are created inside the project folder. 
+</br>
+np.savetxt('test.txt',X_array,fmt='%5s',delimiter=',')</br>
+np.save("fvec.npy", X_array)
+</br><img class="img-responsive" src="folder.png" alt="">
+</li>
+<li>
+	All the codes are as follows. The resulting two different data sets can be used both as .txt and as .npy on the R package.
 
+After copying the .npy file to the working folder to load the .npy file on R, the data set can be imported into the R environment with the following codes. For this, the "RcppCNPy" library must be loaded in the R environment with the install.packages ("RcppCNPy") command. 
+	</br>
+library(RcppCNPy)</br>
+npData <- npyLoad("fvec.npy") 
+</li>
 </ol> 
             </div> 
 
@@ -83,7 +102,9 @@ for myFile in files:</br>
 	
             
         </div>
- 
+ <div>
+	
+</div>
 
 
 		
