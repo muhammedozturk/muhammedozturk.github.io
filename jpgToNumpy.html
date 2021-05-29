@@ -42,7 +42,7 @@
             <div class="col-md-8" style="height: 100vh;">
                 
                 <!-- Main Image -->
-                <img class="img-responsive" src="env.png" alt=""><br>
+       
                 
 			
 			<article>
@@ -56,7 +56,26 @@ If you intend to perform convolutional neural network on R, Pillow and Anaconda 
 		     <ol>
   <li>Python Application project is created on Visual Studio. </li>
   <li>Opencv package needs to be installed. For this, Tools=>Python=>Python Environments is selected. </br><img class="img-responsive" src="env.png" alt=""><br></li>
-  <li>Milk</li>
+  <li>Select "Open in PowerShell" on the screen that appears. </br><img class="img-responsive" src="shell.png" alt=""><br><</li>
+	    <li>Install opencv by typing "pip install opencv-python" command. However, it should be noted that Visual Studio must be opened in admin mode to avoid an error.</br><img class="img-responsive" src="shell2.png" alt=""><br> </li>
+	<li>After the installation is complete, the following library sections are added to the .py file.
+Here cv2 represents opencv. Required for capturing glob image files. Np definition is an abbreviation for numpy library.
+	</br>
+import cv2</br>
+import glob</br>
+import numpy as np </br></li>
+<li>Two arrays are defined. X_data is the array inserted after the images were taken. X_array is a numpy array of images in .jpg format. The conversion takes place for all images in the corresponding folder in the loop. Each image file path is shown while the codes are running.  
+</br>X_data = []</br>
+X_array=[]</br>
+files = glob.glob ("C:/mainFrame/makaleler/patent/dataSet/aflw/data/flickr/1/*.jpg")</br>
+for myFile in files:</br>
+    print(myFile)</br>
+    image = cv2.imread (myFile)</br>
+    X_data.append (image)</br>
+    X_array.append(np.array(X_data))	</br>
+<img class="img-responsive" src="output.png" alt="">
+</li>
+
 </ol> 
             </div> 
 
