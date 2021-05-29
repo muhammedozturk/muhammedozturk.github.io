@@ -60,18 +60,18 @@ If you intend to perform convolutional neural network on R, Pillow and Anaconda 
 	<li>After the installation is complete, the following library sections are added to the .py file.
 Here cv2 represents opencv. Required for capturing glob image files. Np definition is an abbreviation for numpy library.
 	</br>
-import cv2</br>
-import glob</br>
-import numpy as np </br></li>
+<b>import cv2</b></br>
+<b>import glob</b></br>
+<b>import numpy as np </b></br></li>
 <li>Two arrays are defined. X_data is the array inserted after the images were taken. X_array is a numpy array of images in .jpg format. The conversion takes place for all images in the corresponding folder in the loop. Each image file path is shown while the codes are running.  
-</br>X_data = []</br>
-X_array=[]</br>
-files = glob.glob ("C:/mainFrame/makaleler/patent/dataSet/aflw/data/flickr/1/*.jpg")</br>
-for myFile in files:</br>
-    print(myFile)</br>
-    image = cv2.imread (myFile)</br>
-    X_data.append (image)</br>
-    X_array.append(np.array(X_data))	</br>
+</br><b>X_data = []</b></br>
+<b>X_array=[]</b></br>
+<b>files = glob.glob ("C:/mainFrame/makaleler/patent/dataSet/aflw/data/flickr/1/*.jpg")</b></br>
+<b>for myFile in files:</b></br>
+    <b>print(myFile)</b></br>
+    <b>image = cv2.imread (myFile)</b></br>
+   <b> X_data.append (image)</b></br>
+    <b>X_array.append(np.array(X_data))	</b></br>
 <img class="img-responsive" src="output.png" alt="">
 </li>
 <li>
@@ -82,8 +82,8 @@ for myFile in files:</br>
 <li>
 	The following lines are added so that the converted images can be saved in .txt and .npy formats. The .txt file is as follows. The files are created inside the project folder. 
 </br>
-np.savetxt('test.txt',X_array,fmt='%5s',delimiter=',')</br>
-np.save("fvec.npy", X_array)
+<b>np.savetxt('test.txt',X_array,fmt='%5s',delimiter=',')</b></br>
+<b>np.save("fvec.npy", X_array)</b>
 </br><img class="img-responsive" src="extFile.png" alt=""></br>
 </br><img class="img-responsive" src="folder.png" alt="">
 </li>
@@ -92,8 +92,8 @@ np.save("fvec.npy", X_array)
 
 After copying the .npy file to the working folder to load the .npy file on R, the data set can be imported into the R environment with the following codes. For this, the "RcppCNPy" library must be loaded in the R environment with the install.packages ("RcppCNPy") command. 
 	</br>
-library(RcppCNPy)</br>
-npData <- npyLoad("fvec.npy") 
+<b>library(RcppCNPy)</b></br>
+<b>npData <- npyLoad("fvec.npy") </b>
 </li>
 </ol> 
             
