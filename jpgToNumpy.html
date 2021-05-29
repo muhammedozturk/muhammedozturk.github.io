@@ -52,11 +52,10 @@
 If you intend to perform convolutional neural network on R, Pillow and Anaconda settings can cause problems if you do not use images converted to numpy array format like Mnist dataset. To solve this problem, image files such as .jpg should be converted to numpy array format in python environment. In this article, the necessary procedures are detailed as follows: 
 			</article>
 		
-                </div>
-		     <ol>
+               	     <ol>
   <li>Python Application project is created on Visual Studio. </li>
-  <li>Opencv package needs to be installed. For this, Tools=>Python=>Python Environments is selected. </br><img class="img-responsive" src="env.png" alt=""><br></li>
-  <li>Select "Open in PowerShell" on the screen that appears. </br><img class="img-responsive" src="shell.png" alt=""><br><</li>
+  <li>Opencv package needs to be installed. For this, Tools=>Python=>Python Environments is selected. </br><img class="img-responsive" src="env.png" alt=""></br></li>
+  <li>Select "Open in PowerShell" on the screen that appears. </br><img class="img-responsive" src="shell.png" alt=""><br></li>
 	    <li>Install opencv by typing "pip install opencv-python" command. However, it should be noted that Visual Studio must be opened in admin mode to avoid an error.</br><img class="img-responsive" src="shell2.png" alt=""><br> </li>
 	<li>After the installation is complete, the following library sections are added to the .py file.
 Here cv2 represents opencv. Required for capturing glob image files. Np definition is an abbreviation for numpy library.
@@ -96,7 +95,19 @@ library(RcppCNPy)</br>
 npData <- npyLoad("fvec.npy") 
 </li>
 </ol> 
-            </div> 
+            
+
+
+
+<h3>References</h3>
+<ol>
+<li>Eddelbuettela, D., & Wub, W. RcppCNPy: Reading and writing NumPy binary files.</li>
+<li>https://stackoverflow.com/questions/37747021/create-numpy-array-of-images</li>
+<li>https://shirinsplayground.netlify.app/2018/06/keras_fruits/</li>
+</ol>
+<h2>APPENDIX</h2>
+<img class="img-responsive" src="kod.png" alt="">
+</div> 
 
            
 	
