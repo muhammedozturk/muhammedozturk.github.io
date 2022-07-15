@@ -83,7 +83,32 @@ using System.IO;</br>
             frequencies.Add("oppo", 40);</br>
             IEnumerable<WordCloudEntry> wordEntries = frequencies.Select(p => new WordCloudEntry(p.Key, p.Value));
 </p>
-    
+    <p>
+	    <strong>To set the font properties, use following lines:</strong></br>
+	     var wordCloud = new WordCloudInput(wordEntries)</br>
+            {</br>
+                Width = 1024,</br>
+                Height = 256,</br>
+                MinFontSize =70,</br>
+                MaxFontSize = 100</br>
+            };
+</p>
+<p>
+	<strong>To create the bitmap of wordcloud, add the following lines:</strong></br>
+	    //////////////////</br>
+            var sizer = new LogSizer(wordCloud);</br>
+             SkGraphicEngine engine = new SkGraphicEngine(sizer, wordCloud);</br>
+            var layout = new SpiralLayout(wordCloud);</br>
+            var colorizer = new RandomColorizer(); // optional</br>
+            var wcg = new WordCloudGenerator<SKBitmap>(wordCloud, engine, layout, colorizer);</br>
+            IEnumerable<(LayoutItem Item, double FontSize)> items = wcg.Arrange();</br>
+             var bitmap = new SKBitmap(wordCloud.Width, wordCloud.Height);</br>
+             var canvas = new SKCanvas(bitmap);</br>
+            // Draw on white background.</br>
+            canvas.Clear(SKColors.White);</br>
+            canvas.DrawBitmap(wcg.Draw(), 0, 0);</br>
+            ////////////////////////////////////
+</p>
 </body>
 
 </html>
