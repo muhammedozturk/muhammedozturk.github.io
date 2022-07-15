@@ -44,7 +44,27 @@ To this end, a Xamarin Form design is utilized in Visual Studio 2019.
 In .xaml page should include two items including an image and a button as below.	
 	</p>
 	
-
+<pre>
+  <code>
+    p { color: red; }
+    body { background-color: #eee; }
+      <ContentPage.Content>     
+        <StackLayout>
+            <Grid 
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                   x:Name="wordcloudImage"                         
+                   Aspect="AspectFit"                    
+                />
+            </Grid>
+            <Button Text="Main page" Clicked="mainPage" />
+           
+            <Button Text="create wordcloud!" Clicked="wordcloud" />
+        </StackLayout>
+    </ContentPage.Content>
+  </code>
+</pre>
             
             
      
