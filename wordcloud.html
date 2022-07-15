@@ -109,6 +109,25 @@ using System.IO;</br>
             canvas.DrawBitmap(wcg.Draw(), 0, 0);</br>
             ////////////////////////////////////
 </p>
+<p>
+	<strong>To save the image, perform the following rows:</strong></br>
+	  string location = "temp";</br>
+            var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);</br>
+            documentsPath = Path.Combine(documentsPath, "Orders", location);</br>
+            Directory.CreateDirectory(documentsPath);</br>
+            var data = bitmap.Encode(SKEncodedImageFormat.Png, 100);</br>
+             var writer = File.Create(documentsPath+"output.png");</br>
+            data.SaveTo(writer);</br>
+<strong>To show the image use following line to set the path of the image:</strong></br>
+resim.Source = documentsPath+"output.png";</br>
+<strong>To see the exact path of the image, use the following line:</strong></br>
+     Application.Current.MainPage.DisplayAlert("message", documentsPath.ToString(), "close");</br>
+#######################################</br>
+<strong>The full version of the wordcloud function.</srtong></br>
+##############################################</br>
+<img src="part1.png" alt="hi" class="inline"/>
+<img src="part2.png" alt="hi" class="inline"/>
+</p>
 </body>
 
 </html>
