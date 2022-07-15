@@ -52,9 +52,9 @@ In .xaml page should include two items including an image and a button as below.
 
     </div>
 <p>
-	Note that the image is in the Grid that enables us to fit the image in phone view.</br>
+	<strong>Note that the image is in the Grid that enables us to fit the image in phone view.</strong></br>
 
-In the top of the xaml.cs page, Add the definitions of libraries given below are required to execute the codes.	
+<strong>In the top of the xaml.cs page, Add the definitions of libraries given below are required to execute the codes.</strong>	
 </p>
     
 <p>
@@ -72,7 +72,17 @@ using KnowledgePicker.WordCloud.Sizers;</br>
 using SkiaSharp;</br>
 using System.IO;</br>
 </p>
- 
+ <p>
+	<strong> Following rows create a set of words along with frequencies.</strong></br>
+	 
+	    var frequencies = new Dictionary<string, int>();</br>
+            frequencies.Add("iphone", 550);</br>
+            frequencies.Add("xiaomi", 500);</br>
+            frequencies.Add("samsung", 100);</br>
+            frequencies.Add("poco", 90);</br>
+            frequencies.Add("oppo", 40);</br>
+            IEnumerable<WordCloudEntry> wordEntries = frequencies.Select(p => new WordCloudEntry(p.Key, p.Value));
+</p>
     
 </body>
 
