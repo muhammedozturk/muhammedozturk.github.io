@@ -87,7 +87,13 @@ using System.Linq;</br>
 }</br>
 </p>
 <p>
-
+Add following function to the xaml.cs file</br>
+	
+	  async void OnTextChanged(object sender, EventArgs e)</br>
+        {</br>
+            SearchBar searchBar = (SearchBar)sender;</br>
+            searchResults.ItemsSource = DataService.GetSearchResults(searchBar.Text);</br>
+        }</br>
 <img src="1.png" alt="hi" class="inline"/>
 <img src="2.png" alt="hi" class="inline"/></br>
 <img src="3.png" alt="hi" class="inline" />
