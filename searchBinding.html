@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+    Plain-Academic by Vasilios Mavroudis
+    Released under the  Simplified BSD License/FreeBSD (2-clause) License.
+    https://github.com/mavroudisv/plain-academic
+-->
+
+<html lang="en">
+<head>
+  <title>Maruf Ozturk</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+	<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+		p {
+  margin-left: 35px;
+}
+</style>
+</head>
+<body>
+
+
+<!-- Navigation -->
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+		<ul class="nav navbar-nav">
+              <li><a href="/">Home</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="#publications">Publications</a></li> 
+              <li><a href="#CV">CV</a></li> 
+		</ul>
+	  </div>
+	</nav>
+	
+
+  
+  <h2>DYNAMIC BINDING SEARCH BOX ANDROID APPLICATION</h2>
+	<p>
+In this article, we see what steps do we need to create a search box in Android application. To this end, a Xamarin Form design is utilized in Visual Studio 2019.
+	</br>
+1. First, and foremost, we should be aware of using Android SDK.</br>
+2. In Visual Studio, create a blank Xamarin Form application,</br>
+</br>
+
+In .xaml page should include two items including an image and a button as below. 
+	</p>
+<ContentPage.Content></br>
+        <StackLayout></br>
+            <SearchBar TextChanged="OnTextChanged" /></br>
+            <ListView x:Name="searchResults" /></br>
+        </StackLayout></br>
+    </ContentPage.Content></br>
+            
+            
+     
+ 
+
+    </div>
+<p>
+Then we create a static DataService class from which we retrieve the words. It should include a list and a function namely GetSearchResults as below. "Fruits" includes the words and GetSearchResuls instantly check whether the typed word is available in the list.
+</p>
+    
+<p>
+using System;</br>
+using System.Collections.Generic;</br>
+using System.Text;</br>
+using System.Linq;</br>
+</p>
+ <p>
+	<strong> Following rows create a set of words along with frequencies.</strong></br>
+	 
+	namespace sqlite2</br>
+{</br>
+    public static class DataService</br>
+    {</br>
+        public static List<string> Fruits { get; } = new List<string></br>
+        {</br>
+        "keyword1",</br>
+        "keyword2",</br>
+        "......",</br>
+        };</br>
+
+        public static List<string> GetSearchResults(string queryString)</br>
+        {</br>
+            var normalizedQuery = queryString?.ToLower() ?? "";</br>
+            return Fruits.Where(f => f.ToLowerInvariant().Contains(normalizedQuery)).ToList();</br>
+        }</br>
+    }</br>
+}</br>
+</p>
+<p>
+
+<img src="1.png" alt="hi" class="inline"/>
+<img src="2.png" alt="hi" class="inline"/></br>
+<img src="3.png" alt="hi" class="inline" />
+<img src="4.png" alt="hi" class="inline" />
+<img src="5.png" alt="hi" class="inline" />
+<img src="6.png" alt="hi" class="inline" />
+<img src="6.png" alt="hi" class="inline" />
+<img src="data.png" alt="hi" class="inline" />
+</p>
+</body>
+
+</html>
