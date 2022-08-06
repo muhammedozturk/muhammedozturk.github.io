@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--
+    Plain-Academic by Vasilios Mavroudis
+    Released under the  Simplified BSD License/FreeBSD (2-clause) License.
+    https://github.com/mavroudisv/plain-academic
+-->
+
+<html lang="en">
+<head>
+  <title>Maruf Ozturk</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+	<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+		p {
+  margin-left: 35px;
+}
+</style>
+</head>
+<body>
+
+
+<!-- Navigation -->
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+		<ul class="nav navbar-nav">
+              <li><a href="/">Home</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="#publications">Publications</a></li> 
+              <li><a href="#CV">CV</a></li> 
+		</ul>
+	  </div>
+	</nav>
+	
+
+  
+  <h2>DYNAMIC BINDING SEARCH BOX ANDROID APPLICATION</h2>
+	<p>
+In this article, we see how to extract keywords from a .txt file in Android. To this end, a Xamarin Form design is utilized in Visual Studio 2019.
+	</br>
+1. First, and foremost, we should be aware of using Android SDK.</br>
+2. In Visual Studio, create a blank Xamarin Form application,</br>
+</br>
+
+In .xaml page should include two items including a label and a button as below. 
+	</p>
+<img src="xml.png" alt="hi" class="inline" />
+    </div>
+    We should add SemanticLibrary and Mono.Android as below:
+    <img src="library.png" alt="hi" class="inline" />
+<p>
+To extract keywords, SemanticLibrary is needed. You can find the library below.
+</p>
+    <a href="SemanticLibrary.dll">Semantic Library</a>
+<p>
+using System;</br>
+using System.Collections.Generic;</br>
+using System.Linq;</br>
+using System.Text;</br>
+using System.Threading.Tasks;</br>
+using System.IO;</br>
+using Xamarin.Forms;</br>
+using Xamarin.Forms.Xaml;</br>
+using SemanticLibrary;</br>
+using System.Collections.ObjectModel;</br>
+</p>
+ <p>
+	<strong> Following function creates keywords from data.txt that we should add to Asset folder and change its property as AndroidAsset as below. You can write something in .txt</strong></br>
+	 <img src="txt.png" alt="hi" class="inline" />
+   async void extract(object sender, EventArgs args)</br>
+        {</br>
+            var stream = Android.App.Application.Context.Assets.Open("data.txt");</br>
+
+            StreamReader sr = new StreamReader(stream);</br>
+            string text = sr.ReadToEnd();</br>
+        
+
+            KeywordAnalyzer ka = new KeywordAnalyzer();</br>
+
+            var g = ka.Analyze(text);</br>
+            string wordList = "";</br>
+        
+            foreach (var key in g.Keywords)</br>
+            {
+              
+                combo.Items.Add(key.Rank.ToString());</br>
+                combo.Items.Add(key.Word.ToString());</br>
+            
+                    wordList += ((int)key.Rank).ToString() + Environment.NewLine;</br>
+                    wordList += key.Word.ToString() + Environment.NewLine;</br>
+                
+            }</br>
+            combo2.Text = wordList;</br>
+            
+        }</br>
+</p>
+<p>
+The complete form of the xaml.cs file is presented below.
+<h2 style="color:Tomato;">####################DataService.cs file</h2>
+<img src="kod1.png" alt="hi" class="inline"/>
+<img src="kod2.png" alt="hi" class="inline"/></br>
+<img src="kod3.png" alt="hi" class="inline" />
+</p>
+</body>
+
+</html>
