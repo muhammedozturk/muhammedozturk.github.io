@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+
+<!--
+
+Plain-Academic by Vasilios Mavroudis
+
+Released under the Simplified BSD License/FreeBSD (2-clause) License.
+
+https://github.com/mavroudisv/plain-academic
+
+-->
+
+
+
+<html lang="en">
+
+<head>
+
+<title>Xamarin Simple Animation</title>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+
+<style>
+
+img {
+
+display: block;
+
+margin-left: auto;
+
+margin-right: auto;
+
+}
+
+p {
+
+margin-left: 35px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+
+
+<!-- Navigation -->
+
+<nav class="navbar navbar-inverse">
+
+<div class="container">
+
+<ul class="nav navbar-nav">
+
+<li><a href="/">Home</a></li>
+
+<li><a href="projects.html">Projects</a></li>
+
+<li><a href="#publications">Publications</a></li> 
+
+<li><a href="#CV">CV</a></li> 
+
+</ul>
+
+</div>
+
+</nav>
+
+
+
+
+
+
+
+<h2>Xamarin Animation Android Application</h2>
+
+<p>
+
+In this article, we see how to create a simple animation in Xamarin Android.
+
+To this end, a Xamarin Form design is utilized in Visual Studio 2019.
+
+</br>
+
+
+
+1. In Visual Studio, create a blank Xamarin Form application,</br>
+
+2. First we need an .xaml page namely AnimatedGifPage to add Canvas and SLider/br>
+
+
+
+In .xaml page should include three items including Slider, Label, and SKCanvasView. Your .xaml page should seem to be as follows:
+
+</p>
+
+
+
+<img src="animationXaml.png" alt="hi" class="inline"/>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<p>
+
+<strong>Note that slider help us set the speed of animation.</strong></br>
+
+
+
+<strong>In the top of the xaml.cs page, Add the definitions of libraries given below are required to execute the codes. Installing SkiaSharp is a must to design an animation in Xamarin.</strong> 
+
+</p>
+
+
+
+<p>
+
+using SkiaSharp;</br>
+using SkiaSharp.Views.Forms;</br>
+using System;</br>
+using System.Diagnostics;</br>
+using System.Threading.Tasks;</br>
+using Xamarin.Forms;</br>
+using Xamarin.Forms.Xaml;</br>
+
+</p>
+
+<p>
+
+<strong> Following  functions enable animation to start and stop whenever we want.</strong></br>
+
+
+
+  protected override void OnAppearing()</br>
+        {</br>
+            base.OnAppearing();</br>
+            pageIsActive = true;</br>
+            AnimationLoop();</br>
+        }</br>
+
+        protected override void OnDisappearing()</br>
+        {</br>
+            base.OnDisappearing();</br>
+            pageIsActive = false;</br>
+        }</br>
+
+</p>
+
+<p>
+
+<strong>The function called AnimationLoop provides a continuous execution as follows: </strong></br>
+
+    async Task AnimationLoop()</br>
+        {</br>
+            stopwatch.Start();</br>
+
+            while (pageIsActive)</br>
+            {</br>
+                double cycleTime = slider.Value;</br>
+                double t = stopwatch.Elapsed.TotalSeconds % cycleTime / cycleTime;</br>
+                scale = (1 + (float)Math.Sin(2 * Math.PI * t)) / 2;</br>
+                canvasView.InvalidateSurface();</br>
+                await Task.Delay(TimeSpan.FromSeconds(1.0 / 30));</br>
+            }</br>
+
+            stopwatch.Stop();</br>
+        }</br>
+
+</p>
+
+<p>
+
+The function OnCanvasViewPaintSurface creates the animation object on .xaml as follows.</br>
+
+ void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)</br>
+        {</br>
+            SKImageInfo info = args.Info;</br>
+            SKSurface surface = args.Surface;</br>
+            SKCanvas canvas = surface.Canvas;</br>
+
+            canvas.Clear();</br>
+
+            float maxRadius = 0.75f * Math.Min(info.Width, info.Height) / 2;</br>
+            float minRadius = 0.25f * maxRadius;</br>
+
+            float xRadius = minRadius * scale + maxRadius * (1 - scale);</br>
+            float yRadius = maxRadius * scale + minRadius * (1 - scale);</br>
+
+            using (SKPaint paint = new SKPaint())</br>
+            {</br>
+                paint.Style = SKPaintStyle.Stroke;</br>
+                paint.Color = SKColors.Blue;</br>
+                paint.StrokeWidth = 50;</br>
+                canvas.DrawOval(info.Width / 2, info.Height / 2, xRadius, yRadius, paint);</br>
+
+                paint.Style = SKPaintStyle.Fill;</br>
+                paint.Color = SKColors.SkyBlue;</br>
+                canvas.DrawOval(info.Width / 2, info.Height / 2, xRadius, yRadius, paint);</br>
+            }</br>
+        }</br>
+
+#######################################</br>
+
+<strong>The full version of the animation codes.</srtong></br>
+
+##############################################</br>
+
+<img src="p1.png" alt="hi" class="inline"/>
+
+<img src="p2.png" alt="hi" class="inline"/></br>
+
+<img src="p3.png" alt="hi" class="inline" />
+
+</p>
+
+</body>
+
+
+
+</html>
