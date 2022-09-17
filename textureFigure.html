@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+
+<!--
+
+Plain-Academic by Vasilios Mavroudis
+
+Released under the Simplified BSD License/FreeBSD (2-clause) License.
+
+https://github.com/mavroudisv/plain-academic
+
+-->
+
+
+
+<html lang="en">
+
+<head>
+
+<title>Xamarin Texture Figure</title>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+
+<style>
+
+img {
+
+display: block;
+
+margin-left: auto;
+
+margin-right: auto;
+
+}
+
+p {
+
+margin-left: 35px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+
+
+<!-- Navigation -->
+
+<nav class="navbar navbar-inverse">
+
+<div class="container">
+
+<ul class="nav navbar-nav">
+
+<li><a href="/">Home</a></li>
+
+<li><a href="projects.html">Projects</a></li>
+
+<li><a href="#publications">Publications</a></li> 
+
+<li><a href="#CV">CV</a></li> 
+
+</ul>
+
+</div>
+
+</nav>
+
+
+
+
+
+
+
+<h2>Xamarin Creating Textures</h2>
+
+<p>
+
+In this article, we see how to create a simple texture-figure in Xamarin Android.
+
+To that end, a Xamarin Form design is utilized in Visual Studio 2019.
+
+</br>
+
+
+
+1. In Visual Studio, create a blank Xamarin Form application,</br>
+
+2. First we need an .xaml page called quadratic.xaml./br>
+
+
+
+The .xaml page consists of two grids including two canvas: canvasView,canvasView2 as follows:
+
+</p>
+
+
+
+<img src="2022917_2.png" alt="hi" class="inline"/>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<p>
+
+<strong>Second, we prepare canvas surface in OnCanvasViewPaintSurface function as follows:.</strong></br>
+
+
+
+
+</p>
+libraries:
+using System;</br>
+using SkiaSharp;</br>
+using SkiaSharp.Views.Forms;</br>
+using Xamarin.Forms.Xaml;</br>
+<p>
+<strong>Third, we set the width and height of texture-figure as follows:.</strong></br>
+</p>
+
+ float xCenter = info.Width / 2;</br>
+            float yCenter = info.Height / 2;</br>
+            float radius = 0.24f * Math.Min(info.Width, info.Height);</br>
+<p>
+
+<strong> Following  codes decide the type of texture-figure.</strong></br>
+
+
+
+       // Make union of top with bottom
+                        bottomRegion.Op(topRegion, SKRegionOperation.Union);</br>
+
+                        // Exclusive-OR left and right with top and bottom
+                        leftRegion.Op(bottomRegion, SKRegionOperation.XOR);</br>
+
+</p>
+
+<p>
+
+<strong>To create 360 figure, we should add the codes below: </strong></br>
+
+        // Draw 360 lines</br>
+                        for (double angle = 0; angle < 360; angle++)</br>
+                        {</br>
+                            float x = 2 * radius * (float)Math.Cos(Math.PI * angle / 180);</br>
+                            float y = 2 * radius * (float)Math.Sin(Math.PI * angle / 180);</br>
+
+                            using (SKPaint strokePaint = new SKPaint())</br>
+                            {</br>
+                                strokePaint.Color = SKColors.Blue;</br>
+                                strokePaint.StrokeWidth = 3;</br>
+
+                                canvas.DrawLine(0, 0, x, y, strokePaint);</br>
+                            }</br>
+                        }</br>
+
+</p>
+
+<p>
+
+
+<strong>The full version of OnCanvasViewPaintSurface is presented below. Note that in your .xaml.cs file, you must add a second function namely OnCanvasViewPaintSurface2 to create two figures.</srtong></br>
+
+##############################################</br>
+<p>
+ void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)</br>
+        {</br>
+
+            SKImageInfo info = args.Info;</br>
+            SKSurface surface = args.Surface;</br>
+            SKCanvas canvas = surface.Canvas;</br>
+
+            canvas.Clear();</br>
+
+            float xCenter = info.Width / 2;</br>
+            float yCenter = info.Height / 2;</br>
+            float radius = 0.24f * Math.Min(info.Width, info.Height);</br>
+
+            using (SKRegion wholeScreenRegion = new SKRegion())</br>
+            {</br>
+                wholeScreenRegion.SetRect(new SKRectI(0, 0, info.Width, info.Height));</br>
+
+                using (SKRegion leftRegion = new SKRegion(wholeScreenRegion))</br>
+                using (SKRegion rightRegion = new SKRegion(wholeScreenRegion))</br>
+                using (SKRegion topRegion = new SKRegion(wholeScreenRegion))</br>
+                using (SKRegion bottomRegion = new SKRegion(wholeScreenRegion))</br>
+                {</br>
+                    using (SKPath circlePath = new SKPath())</br>
+                    {</br>
+                        // Make basic circle path</br>
+                        circlePath.AddCircle(xCenter, yCenter, radius);</br>
+
+                        // Left leaf</br>
+                        circlePath.Transform(SKMatrix.MakeTranslation(-radius, 0));</br>
+                        leftRegion.SetPath(circlePath);</br>
+
+                        // Right leaf</br>
+                        circlePath.Transform(SKMatrix.MakeTranslation(2 * radius, 0));</br>
+                        rightRegion.SetPath(circlePath);</br>
+
+                        // Make union of right with left</br>
+                        leftRegion.Op(rightRegion, SKRegionOperation.Union);</br>
+
+                        // Top leaf</br>
+                        circlePath.Transform(SKMatrix.MakeTranslation(-radius, -radius));</br>
+                        topRegion.SetPath(circlePath);</br>
+
+                        // Combine with bottom leaf</br>
+                        circlePath.Transform(SKMatrix.MakeTranslation(0, 2 * radius));</br>
+                        bottomRegion.SetPath(circlePath);</br>
+
+                        // Make union of top with bottom</br>
+                        bottomRegion.Op(topRegion, SKRegionOperation.Union);</br>
+
+                        // Exclusive-OR left and right with top and bottom</br>
+                        leftRegion.Op(bottomRegion, SKRegionOperation.XOR);</br>
+
+                        // Set that as clip region</br>
+                        canvas.ClipRegion(leftRegion);</br>
+
+                        // Set transform for drawing lines from center</br>
+                        canvas.Translate(xCenter, yCenter);</br>
+
+                        // Draw 360 lines</br>
+                        for (double angle = 0; angle < 360; angle++)</br>
+                        {</br>
+                            float x = 2 * radius * (float)Math.Cos(Math.PI * angle / 180);</br>
+                            float y = 2 * radius * (float)Math.Sin(Math.PI * angle / 180);</br>
+
+                            using (SKPaint strokePaint = new SKPaint())</br>
+                            {</br>
+                                strokePaint.Color = SKColors.Blue;</br>
+                                strokePaint.StrokeWidth = 3;</br>
+
+                                canvas.DrawLine(0, 0, x, y, strokePaint);</br>
+                            }</br>
+                        }</br>
+                    }</br>
+                }</br>
+            }</br>
+        }</br>
+</p>
+<img src="2022917_1.png" alt="hi" class="inline"/>
+
+</p>
+
+</body>
+
+
+
+</html>
