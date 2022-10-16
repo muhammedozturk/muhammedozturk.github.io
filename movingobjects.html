@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+<head>
+
+<title>Xamarin Moving Objects</title>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+
+<style>
+
+img {
+
+display: block;
+
+margin-left: auto;
+
+margin-right: auto;
+
+}
+
+p {
+
+margin-left: 35px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+
+
+<!-- Navigation -->
+
+<nav class="navbar navbar-inverse">
+
+<div class="container">
+
+<ul class="nav navbar-nav">
+
+<li><a href="/">Home</a></li>
+
+<li><a href="projects.html">Projects</a></li>
+
+<li><a href="#publications">Publications</a></li> 
+
+<li><a href="#CV">CV</a></li> 
+
+</ul>
+
+</div>
+
+</nav>
+
+
+
+
+
+
+
+<h2>Xamarin Animation Android Application</h2>
+
+<p>
+
+In this article, we see how to create moving objects  in Xamarin Android.
+
+To this end, a Xamarin Form design is utilized in Visual Studio 2019.
+
+</br>
+
+
+
+1. In Visual Studio, create a blank Xamarin Form application,</br>
+
+2. The MainPage.xaml is enough to create moving objects./br>
+
+
+
+In .xaml page should include three items including button, image, and imagebutton. Your .xaml page should seem to be as follows:
+
+</p>
+
+
+
+<img src="16102022_4.png" alt="hi" class="inline"/>
+
+
+</div>
+
+<p>
+
+<strong>Note that we added image to see it cannot move as imagebutton does.</strong></br>
+
+
+
+
+
+</p>
+
+
+<p>
+
+<strong> Following  functions enable animation to start and stop whenever we want.</strong></br>
+
+
+
+   async void OnButtonClicked(object sender, EventArgs args)</br>
+        {</br>
+            button.Rotation = 0; button.RotateTo(360, 2000); await button.ScaleTo(5, 1000);</br>
+            // image1.Rotation = 0; image1.RotateTo(360, 2000); await image1.ScaleTo(5, 1000);</br>
+            image1.RotateTo(180);</br>
+        }
+
+</p>
+
+<p>
+
+<strong>The function we defined above can be executed in differeny ways depending on your design constraints. </strong></br>
+
+
+</p>
+
+<p>
+
+
+
+#######################################</br>
+
+<strong>You should add an image to drawable folder as below:</srtong></br>
+
+##############################################</br>
+
+<img src="16102022_3.png" alt="hi" class="inline"/>
+<strong>Change the BuildAction property of image as AndroidSource:</srtong></br>
+<img src="16102022_5.png" alt="hi" class="inline"/>
+<strong>If you click the imagebutton your moving objects seem like below:</srtong></br>
+<img src="16102022_1.png" alt="hi" class="inline"/>
+<img src="16102022_2.png" alt="hi" class="inline"/>
+</p>
+
+</body>
+
+
+
+</html>
