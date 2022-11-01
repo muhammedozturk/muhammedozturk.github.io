@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+
+<!--
+
+Plain-Academic by Vasilios Mavroudis
+
+Released under the Simplified BSD License/FreeBSD (2-clause) License.
+
+https://github.com/mavroudisv/plain-academic
+
+-->
+
+
+
+<html lang="en">
+
+<head>
+
+<title>CREATE ONTOLOGY FROM WEB SOURCE</title>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+
+<style>
+
+img {
+
+display: block;
+
+margin-left: auto;
+
+margin-right: auto;
+
+}
+
+p {
+
+margin-left: 35px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+
+
+<!-- Navigation -->
+
+<nav class="navbar navbar-inverse">
+
+<div class="container">
+
+<ul class="nav navbar-nav">
+
+<li><a href="/">Home</a></li>
+
+<li><a href="projects.html">Projects</a></li>
+
+<li><a href="#publications">Publications</a></li> 
+
+<li><a href="#CV">CV</a></li> 
+
+</ul>
+
+</div>
+
+</nav>
+
+
+
+
+
+
+
+<h2>Creating web ontology from scratch</h2>
+
+<p>
+
+In this article, we see how to ontology from a web source.
+
+To this end, R package has been used to get web source and process it. 
+
+</br>
+
+
+First we need to use the commands below in order to install following R packages:
+1. install.packages("rvest")</br>
+
+2. install.packages ("stringr")</br>
+3. install.packages (rvest) </br>
+To create the ontology and design some plots, the packages above should be installed in R GUI.
+1. install.packages("ontologyIndex")</br>
+
+2. install.packages ("ontologyPlot")</br>
+3. install.packages (“rlist”) </br>
+
+
+
+To get web source and write to a txt file some R codes should be run as follows: </br>
+library("stringr")</br>
+library(rvest) </br>
+simple <- read_html("https://www.sciencedaily.com/releases/2022/01/220106143653.htm")</br>
+yeni <- simple %>%</br>
+html_nodes("p") %>%</br>
+html_text()</br>
+file="C:/Users/maruf/Desktop/pca2.txt"</br>
+write.table(yeni,file="C:/Users/maruf/Desktop/pca2.txt",sep="\t")</br>
+con <- file('C:/Users/maruf/Desktop/pca2.txt',open="r")</br>
+# read file contents</br>
+data1 <- readLines(con) </br>
+# close the connection</br>
+close(con) </br>
+tablo2 <- str_split(data1, " ")</br>
+write.table(tablo2[4],file="C:/Users/maruf/Desktop/pca21.txt",sep="\t")</br>
+write.table(tablo2[5],file="C:/Users/maruf/Desktop/pca22.txt",sep="\t")</br>
+</p>
+<strong>To read the text files, executes the codes below:</strong></br>
+###########################
+con <- file('C:/Users/maruf/Desktop/pca21.txt',open="r")</br>
+# read file contents</br>
+data2 <- readLines(con) </br>
+# close the connection</br>
+close(con) </br>
+####################################</br>
+con <- file('C:/Users/maruf/Desktop/pca22.txt',open="r")</br>
+# read file contents</br>
+data3 <- readLines(con) </br>
+# close the connection</br>
+close(con) </br>
+#######################</br>
+data2 <- data2[1:56] </br>
+write.table(data2,file="C:/Users/maruf/Desktop/pca21.txt",sep="\t")</br>
+write.table(data3,file="C:/Users/maruf/Desktop/pca22.txt",sep="\t")</br>
+<strong>To create the ontology, run the following lines:</strong></br>
+
+library("ontologyIndex")</br>
+library("ontologyPlot")</br>
+library("rlist")</br>
+
+matris <- list("elements")</br>
+
+
+##get ancestors</br>
+fileName <- "C://Users/maruf/Desktop/pca21.txt"</br>
+conn <- file(fileName,open="r")</br>
+linn <-readLines(conn) </br>
+for (i in 1:length(linn)){ </br>
+matris <- list.append(matris,linn[i]) </br>
+   print(linn[i]) </br>
+}</br>
+close(conn) </br>
+matris <- matris[-1] </br>
+#get childs</br>
+x <- c()</br>
+fileName <- "C://Users/maruf/Desktop/pca22.txt"</br>
+conn <- file(fileName,open="r")</br>
+linn <-readLines(conn) </br>
+for (i in 1:length(linn)){ </br>
+x <- append(x,linn[i]) </br>
+   print(linn[i]) </br>
+}</br>
+close(conn) </br>
+
+
+
+names(matris) <- x</br>
+univ_superclasses <- matris</br>
+univ_ontology <- ontology_index(parents=univ_superclasses) </br>
+unclass(univ_ontology) </br>
+hypo <- c("discovery","defies","in","our")</br>
+onto_plot(univ_ontology,term_sets=hypo,width=1,fontsize=14,fixedsize="true")</br>
+
+########################
+##################
+
+
+
+
+
+
+
+
+<strong>In the end, you get the right side of the following figure:</strong></br>
+
+
+</div>
+          
+
+
+<img src="ontologyx.png" alt="hi" class="inline"/>
+
+</p>
+
+</body>
+
+
+
+</html>
