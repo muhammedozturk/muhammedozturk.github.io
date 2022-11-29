@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+
+<!--
+
+Plain-Academic by Vasilios Mavroudis
+
+Released under the Simplified BSD License/FreeBSD (2-clause) License.
+
+https://github.com/mavroudisv/plain-academic
+
+-->
+
+
+
+<html lang="en">
+
+<head>
+
+<title>R package CPU benchmark</title>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+
+<style>
+
+img {
+
+display: block;
+
+margin-left: auto;
+
+margin-right: auto;
+
+}
+
+p {
+
+margin-left: 35px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+
+
+<!-- Navigation -->
+
+<nav class="navbar navbar-inverse">
+
+<div class="container">
+
+<ul class="nav navbar-nav">
+
+<li><a href="/">Home</a></li>
+
+<li><a href="projects.html">Projects</a></li>
+
+<li><a href="#publications">Publications</a></li> 
+
+<li><a href="#CV">CV</a></li> 
+
+</ul>
+
+</div>
+
+</nav>
+
+
+
+
+
+
+
+<h2>How to use benchmarkme?</h2>
+
+<p>
+
+In this article, we see how to perform CPU comparison with popular benchmarks.
+
+To this end, following lines should be executed to install benchmark.
+
+</br>
+
+
+
+1. In R GUI, install.packages("benchmarkme")</br>
+
+2. Load library, library("benchmarkme")/br>
+
+
+
+To perform Standard benchmark use following command:<\br>
+<strong>res = benchmark_std()</strong></p>
+
+
+</p>
+
+<strong>In total, 15 test will be completed as follows:</strong></p>
+
+
+<img src="29112022.png" alt="hi" class="inline"/>
+<div>
+
+
+
+
+<strong>To see the order of your CPU, use the following command.</srtong></br>
+
+<strong>upload_results(res)</strong>
+<p>After that, you will get a message about the benchmark as follows:</p>
+<p>The following command draw the order of your test as below:</p>
+
+<img src="291120222.png" alt="hi" class="inline"/></br>
+
+<p>Further, you can get platform information where you are running on as below:</p>
+<strong> get_platform_info()</strong>
+</p>
+</body>
+</html>
