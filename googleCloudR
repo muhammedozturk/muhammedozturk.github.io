@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+
+<!--
+
+Plain-Academic by Vasilios Mavroudis
+
+Released under the Simplified BSD License/FreeBSD (2-clause) License.
+
+https://github.com/mavroudisv/plain-academic
+
+-->
+
+
+
+<html lang="en">
+
+<head>
+
+<title>Usage of google cloud for R big data applications</title>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+
+<style>
+
+img {
+
+display: block;
+
+margin-left: auto;
+
+margin-right: auto;
+
+}
+
+p {
+
+margin-left: 35px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+
+
+<!-- Navigation -->
+
+<nav class="navbar navbar-inverse">
+
+<div class="container">
+
+<ul class="nav navbar-nav">
+
+<li><a href="/">Home</a></li>
+
+<li><a href="projects.html">Projects</a></li>
+
+<li><a href="#publications">Publications</a></li> 
+
+<li><a href="#CV">CV</a></li> 
+
+</ul>
+
+</div>
+
+</nav>
+
+
+
+
+
+
+
+<h2>How to use google cloud for R?</h2>
+
+<p>
+
+In this article, we see how to perform R big data application on google cloud.
+
+</br>
+
+
+
+1. First we need to sign in google cloud with trial or Professional account</br>
+
+2. Write “Compute Engine” in search box as below:</br>
+
+
+
+<img src="2612022_1.png" alt="hi" class="inline"/></br>
+
+
+</p>
+
+<strong>Click “create instance” to create new instance below:<strong></p>
+
+
+<img src="26122022_2.png" alt="hi" class="inline"/>
+<div>
+
+
+
+
+<p>After that, we can create new jupyternotebook to start writing R codes </p></br>
+
+<strong>Write “Vertex AI” in search box to go notebook creation page as follow:</strong>
+
+<img src="26122022_3.png" alt="hi" class="inline"/></br>
+<img src="26122022_4.png" alt="hi" class="inline"/></br>
+<p> In this section, we can use “new notebook” menu to create jupyterlab in google cloud. The notebook should seem to like this: </p>
+
+<img src="26122022_5.png" alt="hi" class="inline"/></br>
+<strong>In the left bottom of the screen, you see R|idle or R|busy. If yo urun the command for a while, R|busy indicates that the codes are being executed and further command operation is not allowed until the end of the process. We can write new commands once R|idle emerges. </strong>
+<p>One cell may include one or further command rows o be executed.  </p>
+</body>
+</html>
+
