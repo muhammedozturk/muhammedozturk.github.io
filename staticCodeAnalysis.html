@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--
+    Plain-Academic by Vasilios Mavroudis
+    Released under the  Simplified BSD License/FreeBSD (2-clause) License.
+    https://github.com/mavroudisv/plain-academic
+-->
+
+<html lang="en">
+<head>
+  <title>Maruf Ozturk</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+	<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+		p {
+  margin-left: 35px;
+}
+</style>
+</head>
+<body>
+
+
+<!-- Navigation -->
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+		<ul class="nav navbar-nav">
+              <li><a href="/">Home</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="#publications">Publications</a></li> 
+              <li><a href="#CV">CV</a></li> 
+		</ul>
+	  </div>
+	</nav>
+	
+
+  
+  <h2>Which static code analysis tool is best and why?</h2>
+	<p>
+In this article,  I present the reasons why SonarQube is best for performing static code analysis. Further, you can find a demonstration on how to execute SonarQube for a Visual Studio Project. 
+	</br>
+<img src="1192023_1.png" alt="hi" class="inline" />
+
+The reasons are given as below:</br>
+1. First, SonarQube is almost able to detect all the types of quality issues.<br>
+2. It is easy to learn and apply an object oriented Project by following some steps.</br>
+3. Note that each type of static code analysis tool has special design to detect different quality issues.
+</br>
+<strong> Follow the instructions below to perform a static code analysis on sonarqube.</strong></br>
+1.	Go to https://docs.sonarqube.org/latest/try-out-sonarqube/, after that , to execute Sonarqube, you first download .zip file from sonarqube web site through this link: https://www.sonarqube.org/downloads/   </br>
+2.	Unzip file to C: folder.</br>
+Execute C:\sonarqube\bin\windows-x86-64\StartSonar.bat on “cmd” command promt as below:</br>
+<img src="1192023_2.png" alt="hi" class="inline" /></br>
+3.	Go to http://localhost:9000 using a web browser and the user credentials are default : user:admin  pass:admin.
+4.	 Click “crate Project” to start new static code analysis as below:
+<img src="1192023_3.png" alt="hi" class="inline" /></br>
+
+5.	Enter the Project name in that screen as below:
+<img src="1192023_4.png" alt="hi" class="inline" /></br>
+6.	If you have a Visual Studio Project select “Locally” in the next screen as below:
+<img src="1192023_5.png" alt="hi" class="inline" /></br>
+7.	“Generate” token as below:
+<img src="1192023_6.png" alt="hi" class="inline" /></br>
+	</p>
+8.	If you have not installed dotnet-scanner copy the first row of command to install dotnetscanner in a new cmd prompt screen as below:
+<img src="1192023_7.png" alt="hi" class="inline" /></br>
+Otherwise, open a cmd prompt at Project location folder, aftwerwards you paste the other commands, respectively on the second cmd screen.
+<img src="1192023_8.png" alt="hi" class="inline" /></br>
+9.	You will see “succeeded” message after executing first “execute scanner” command:
+<img src="1192023_9.png" alt="hi" class="inline" /></br>
+10.	Execute “dotnet build” command aferwards.
+11.	You will see “Build succeeded” message:
+<img src="1192023_10.png" alt="hi" class="inline" /></br>
+12.	After executing the last command, you can see the reports by using the link of the end of the screen as below:
+<img src="1192023_11.png" alt="hi" class="inline" /></br>
+<img src="1192023_12.png" alt="hi" class="inline" /></br>
+
+    </div></p></body></html>
