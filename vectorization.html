@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+	
+	
+	<!--
+	Plain-Academic by Vasilios Mavroudis
+	Released under the Simplified BSD License/FreeBSD (2-clause) License.
+	https://github.com/mavroudisv/plain-academic
+	-->
+	
+	
+	
+	<html lang="en">
+	
+	<head>
+	
+	<title>Xamarin Android Gallery</title>
+	
+	<meta charset="utf-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+	<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+	
+	<style>
+	
+	img {
+	
+	display: block;
+	
+	margin-left: auto;
+	
+	margin-right: auto;
+	
+	}
+	
+	p {
+	
+	margin-left: 35px;
+	
+	}
+	
+	</style>
+	
+	</head>
+	
+	<body>
+	
+	
+	
+	
+	
+	<!-- Navigation -->
+	
+	<nav class="navbar navbar-inverse">
+	
+	<div class="container">
+	
+	<ul class="nav navbar-nav">
+	
+	<li><a href="/">Home</a></li>
+	
+	<li><a href="projects.html">Projects</a></li>
+	
+	<li><a href="#publications">Publications</a></li> 
+	
+	<li><a href="#CV">CV</a></li> 
+	
+	</ul>
+	
+	</div>
+	
+	</nav>
+	
+	
+	
+	
+	
+	
+	
+	<h2>Text Vectorization</h2>
+	
+	<p>
+	
+	###########Text Vectorization in R#########
+<img src="21032023_1.jpg" alt="hi" class="inline"/></br>
+
+	Text vectorization is an important step in natural language processing. Machine learning systems need inputs as matrices representing texts to be numeric values. There are three common ways to convert text into a numeric matrix when the development IDE is based on R.
+	Text Vectorization in R
+	
+	</br>
+	
+	
+	
+	<strong> 1. Index-based Vectorization</strong></br>
+</br>
+	
+	Indexing can be performed with some rules as given below. This method is simple yet effective when the dimensions are configured well. “my_fun” function creates new index values, and threreby compares the original vector indexes. </br>
+		my_fun <- function(vec, indices) {</br>
+	  	vec[indices == 1] <- vec[indices == 1] + 5</br>
+	  	vec</br>
+	}</br>
+original_vector <- c(2, 2, 2, 3) </br>
+indices <- c(1, 0, 0, 1) </br>
+mapply(my_fun, original_vector, indices) </br>
+The output: </br>
+[1] 7 2 2 8</br>
+<strong> 2 Count Vectorizer </strong></br>
+ 
+Bag-of-words models are preferred in count vectorization. The idea is to count the number of unique words and their frequency in a specific text. But in this case, the sparsity of the training matrix creates an overload in the computation. R Superml provides us to perform count vectorization as below:
+</br>
+	
+	
+	library(superml) </br>
+sents <-  c('chair desk table', </br>
+          'first you get the Money then you get the power//// ', </br>
+          'how does it work', </br>
+          'transform your work and go work again', </br>
+          'home is where you go from to work') </br>
+n <- 10</br>
+sents <- rep(sents, n) </br>
+length(sents) </br>
+	cfv <- CountVectorizer$new(max_features = 10, remove_stopwords = </br>FALSE)
+	cf_mat <- cfv$fit_transform(sents) </br>
+
+	head(cf_mat, 3) </br>
+
+The output: </br>
+     work you the go get your where transform to then</br>
+[1,]    0   0   0  0   0    0     0         0  0    0</br>
+[2,]    0   2   2  0   2    0     0         0  0    1</br>
+[3,]    1   0   0  0   0    0     0         0  0    0</br>
+<strong> 3. Word2Vec </strong></br>
+It was originally developed by a team from Google in 2013. Word2Vec9  consists of two-layers of neural network that converts text to a numeric data frame. In that way, the prediction can be performed based on word-word or matrix-matrix depending on the design of the experiment.</br>
+
+	
+	</p>
+	
+	
+	<img src="21032023_2.jpg" alt="hi" class="inline"/>
+<p>
+The code given below creates an embedding matrix from the text by utilizing a data set namely brussels_reviews. The ultimate output of the model can be further used to predict a specific word or matrix. You can look “word2vec” R library to delve into that topic. </br>
+library(udpipe) </br>
+## Take data and standardise it a bit</br>
+data(brussels_reviews, package = "udpipe")</br>
+x <- subset(brussels_reviews, language == "nl")</br>
+x <- tolower(x$feedback)
+model <- word2vec(x = x, dim = 15, iter = 20) </br>
+emb <- as.matrix(model) </br>
+</p>
+<img src="21032023_3.jpg" alt="hi" class="inline"/>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</div>
+	
+	<p>
+	
+	
+	</p>
+	
+	</body>
+	
+	
+	
+	</html>
+
