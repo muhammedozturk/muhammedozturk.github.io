@@ -44,17 +44,17 @@ img {
   
   <h2>Sqlite operation on MAUI</h2>
 	<p>
-	In this article, we see how to create and connect to an sqlite in Visual Studio.
-To this end, first create an empty MAUI project in Visual Studio 2022.
+	In this article, we see how to create and connect to a SQLite in Visual Studio.
+To this end, first, create an empty MAUI project in Visual Studio 2022.
 	</br>
-1. First, and foremost, we should install sqlite-net-pcl package using Nuget package manager.</br>
-2. After that, create a class namely Constant.cs to give credentials of connection as below, change namespace name as you created (Phoneword)</br>
+1. First, and foremost, we should install the sqlite-net-pcl package using the Nuget package manager.</br>
+2. After that, create a class namely Constant.cs to give credentials of connection as below, and change the namespace name as you created (Phoneword)</br>
 <img src="constants.png" alt="hi" class="inline"/>
-3. We then create a class called "ToDoItem.cs" to give fields of table as below:	
+3. We then create a class called "ToDoItem.cs" to give fields of the table as below:	
 	</p>
 	
 <img src="todoitem.png" alt="hi" class="inline"/>
-4. "ToDoItemDatabase.cs" will define the operations on database we have as below:
+4. "ToDoItemDatabase.cs" will define the operations on the database we have as below:
 	<p>
 using SQLite;</br>
 using System;</br>
@@ -127,8 +127,8 @@ namespace Phoneword</br>
  
     </div>
 
-<strong>5. Last, I have a numberTranslator.xaml that includes codes for triggers database as below. Note that fist execute the lines that seem comment, threreby uncommenting them. If you do
-not have a strong machine, connect your mobile phone via usb cable to run simulator on the mobile. Choose local device from mene before debugging.</srtong></br>
+<strong>5. Last, I have a numberTranslator.xaml that includes codes for the triggers database as below. Note that the first executes the lines that seem to comment, thereby uncommenting them. If you do
+not have a strong machine, connect your mobile phone via a USB cable to run a simulator on the mobile. Choose a local device from the menu before debugging.</srtong></br>
 ##############################################</br>
 <img src="phnenumber.png" alt="hi" class="inline"/>
 <img src="phonenumbercs.png" alt="hi" class="inline"/></br>
