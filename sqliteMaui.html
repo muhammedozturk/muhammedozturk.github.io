@@ -49,32 +49,7 @@ To this end, first create an empty MAUI project in Visual Studio 2022.
 	</br>
 1. First, and foremost, we should install sqlite-net-pcl package using Nuget package manager.</br>
 2. After that, create a class namely Constant.cs to give credentials of connection as below, change namespace name as you created (Phoneword)</br>
-```
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Phoneword
-{
-    public static class Constants
-    {
-        public const string DatabaseFilename = "TodoSQLite.db3";
-
-        public const SQLite.SQLiteOpenFlags Flags =
-            // open the database in read/write mode
-            SQLite.SQLiteOpenFlags.ReadWrite |
-            // create the database if it doesn't exist
-            SQLite.SQLiteOpenFlags.Create |
-            // enable multi-threaded database access
-            SQLite.SQLiteOpenFlags.SharedCache;
-
-        public static string DatabasePath =>
-            Path.Combine(FileSystem.AppDataDirectory, DatabaseFilename);
-    }
-}
-```	
+<img src="constants.png" alt="hi" class="inline"/>
 3. From Tools->Nuget Package Manager->Manage Nuget Packages for Solution, install KnowledgePicker.WordCloud that provides us to create wordcloud image.</br>
 
 In .xaml page should include two items including an image and a button as below.	
