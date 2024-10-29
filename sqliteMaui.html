@@ -54,84 +54,80 @@ To this end, first create an empty MAUI project in Visual Studio 2022.
 	</p>
 	
 <img src="todoitem.png" alt="hi" class="inline"/>
-            
+4. "ToDoItemDatabase.cs" will define the operations on database we have as below:
+	<p>
+using SQLite;</br>
+using System;</br>
+using System.Collections.Generic;</br>
+using System.Linq;</br>
+using System.Text;</br>
+using System.Threading.Tasks;</br>
+using SQLitePCL;</br>
+namespace Phoneword</br>
+{</br>
+    public class TodoItemDatabase</br>
+    {</br>
+        SQLiteAsyncConnection Database;</br>
+        public TodoItemDatabase()</br>
+        {</br>
+        }</br>
+        async Task Init()</br>
+        {</br>
+            if (Database is not null)</br>
+                return;</br>
+
+            Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);</br>
+            var result = await Database.CreateTableAsync<TodoItem>();</br>
+        }</br>
+
+        public async Task<List<TodoItem>> GetItemsAsync()</br>
+        {</br>
+            await Init();</br>
+            return await Database.Table<TodoItem>().ToListAsync();</br>
+        }</br>
+
+        public async Task<List<TodoItem>> GetItemsNotDoneAsync()</br>
+        {</br>
+            await Init();</br>
+            return await Database.Table<TodoItem>().Where(t => t.Done).ToListAsync();</br>
+
+            // SQL queries are also possible</br>
+            //return await Database.QueryAsync<TodoItem>("SELECT * FROM [TodoItem] WHERE [Done] = 0");</br>
+        }</br>
+
+        public async Task<TodoItem> GetItemAsync(int id)</br>
+        {</br>
+            await Init();</br>
+            return await Database.Table<TodoItem>().Where(i => i.ID == id).FirstOrDefaultAsync();</br>
+        }</br>
+
+        public async Task<int> SaveItemAsync(TodoItem item)</br>
+        {</br>
+            await Init();</br>
+            if (item.ID != 0)</br>
+            {</br>
+                return await Database.UpdateAsync(item);</br>
+            }</br>
+            else</br>
+            {</br>
+                return await Database.InsertAsync(item);</br>
+            }</br>
+        }</br>
+
+        public async Task<int> DeleteItemAsync(TodoItem item)</br>
+        {</br>
+            await Init();</br>
+            return await Database.DeleteAsync(item);</br>
+        }</br>
+    }</br>
+}</br>
+</p>	</br>
             
      
  
 
     </div>
-<p>
-	<strong>Note that the image is in the Grid that enables us to fit the image in phone view.</strong></br>
 
-<strong>In the top of the xaml.cs page, Add the definitions of libraries given below are required to execute the codes.</strong>	
-</p>
-    
-<p>
-	using System;</br>
-using System.Collections.Generic;</br>
-using System.Linq;</br>
-using Xamarin.Forms;</br>
-using Xamarin.Forms.Xaml;</br>
-using KnowledgePicker.WordCloud;</br>
-using KnowledgePicker.WordCloud.Coloring;</br>
-using KnowledgePicker.WordCloud.Drawing;</br>
-using KnowledgePicker.WordCloud.Layouts;</br>
-using KnowledgePicker.WordCloud.Primitives;</br>
-using KnowledgePicker.WordCloud.Sizers;</br>
-using SkiaSharp;</br>
-using System.IO;</br>
-</p>
- <p>
-	<strong> Following rows create a set of words along with frequencies.</strong></br>
-	 
-	    var frequencies = new Dictionary<string, int>();</br>
-            frequencies.Add("iphone", 550);</br>
-            frequencies.Add("xiaomi", 500);</br>
-            frequencies.Add("samsung", 100);</br>
-            frequencies.Add("poco", 90);</br>
-            frequencies.Add("oppo", 40);</br>
-            IEnumerable<WordCloudEntry> wordEntries = frequencies.Select(p => new WordCloudEntry(p.Key, p.Value));
-</p>
-    <p>
-	    <strong>To set the font properties, use following lines:</strong></br>
-	     var wordCloud = new WordCloudInput(wordEntries)</br>
-            {</br>
-                Width = 1024,</br>
-                Height = 256,</br>
-                MinFontSize =70,</br>
-                MaxFontSize = 100</br>
-            };
-</p>
-<p>
-	<strong>To create the bitmap of wordcloud, add the following lines:</strong></br>
-	    //////////////////</br>
-            var sizer = new LogSizer(wordCloud);</br>
-             SkGraphicEngine engine = new SkGraphicEngine(sizer, wordCloud);</br>
-            var layout = new SpiralLayout(wordCloud);</br>
-            var colorizer = new RandomColorizer(); // optional</br>
-            var wcg = new WordCloudGenerator<SKBitmap>(wordCloud, engine, layout, colorizer);</br>
-            IEnumerable<(LayoutItem Item, double FontSize)> items = wcg.Arrange();</br>
-             var bitmap = new SKBitmap(wordCloud.Width, wordCloud.Height);</br>
-             var canvas = new SKCanvas(bitmap);</br>
-            // Draw on white background.</br>
-            canvas.Clear(SKColors.White);</br>
-            canvas.DrawBitmap(wcg.Draw(), 0, 0);</br>
-            ////////////////////////////////////
-</p>
-<p>
-	<strong>To save the image, perform the following rows:</strong></br>
-	  string location = "temp";</br>
-            var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);</br>
-            documentsPath = Path.Combine(documentsPath, "Orders", location);</br>
-            Directory.CreateDirectory(documentsPath);</br>
-            var data = bitmap.Encode(SKEncodedImageFormat.Png, 100);</br>
-             var writer = File.Create(documentsPath+"output.png");</br>
-            data.SaveTo(writer);</br>
-<strong>To show the image use following line to set the path of the image:</strong></br>
-resim.Source = documentsPath+"output.png";</br>
-<strong>To see the exact path of the image, use the following line:</strong></br>
-     Application.Current.MainPage.DisplayAlert("message", documentsPath.ToString(), "close");</br>
-#######################################</br>
 <strong>The full version of the wordcloud function.</srtong></br>
 ##############################################</br>
 <img src="part1.png" alt="hi" class="inline"/>
