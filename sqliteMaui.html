@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--
+    Plain-Academic by Vasilios Mavroudis
+    Released under the  Simplified BSD License/FreeBSD (2-clause) License.
+    https://github.com/mavroudisv/plain-academic
+-->
+
+<html lang="en">
+<head>
+  <title>Maruf Ozturk</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+	<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+		p {
+  margin-left: 35px;
+}
+</style>
+</head>
+<body>
+
+
+<!-- Navigation -->
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+		<ul class="nav navbar-nav">
+              <li><a href="/">Home</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="#publications">Publications</a></li> 
+              <li><a href="#CV">CV</a></li> 
+		</ul>
+	  </div>
+	</nav>
+	
+
+  
+  <h2>Wordcloud Android Application</h2>
+	<p>
+	In this article, we see what steps do we need to create a wordcloud in Android application.
+To this end, a Xamarin Form design is utilized in Visual Studio 2019.
+	</br>
+1. First, and foremost, we should be aware of using Android SDK.</br>
+2. In Visual Studio, create a blank Xamarin Form application,</br>
+3. From Tools->Nuget Package Manager->Manage Nuget Packages for Solution, install KnowledgePicker.WordCloud that provides us to create wordcloud image.</br>
+
+In .xaml page should include two items including an image and a button as below.	
+	</p>
+	
+<img src="wordcloud.png" alt="hi" class="inline"/>
+            
+            
+     
+ 
+
+    </div>
+<p>
+	<strong>Note that the image is in the Grid that enables us to fit the image in phone view.</strong></br>
+
+<strong>In the top of the xaml.cs page, Add the definitions of libraries given below are required to execute the codes.</strong>	
+</p>
+    
+<p>
+	using System;</br>
+using System.Collections.Generic;</br>
+using System.Linq;</br>
+using Xamarin.Forms;</br>
+using Xamarin.Forms.Xaml;</br>
+using KnowledgePicker.WordCloud;</br>
+using KnowledgePicker.WordCloud.Coloring;</br>
+using KnowledgePicker.WordCloud.Drawing;</br>
+using KnowledgePicker.WordCloud.Layouts;</br>
+using KnowledgePicker.WordCloud.Primitives;</br>
+using KnowledgePicker.WordCloud.Sizers;</br>
+using SkiaSharp;</br>
+using System.IO;</br>
+</p>
+ <p>
+	<strong> Following rows create a set of words along with frequencies.</strong></br>
+	 
+	    var frequencies = new Dictionary<string, int>();</br>
+            frequencies.Add("iphone", 550);</br>
+            frequencies.Add("xiaomi", 500);</br>
+            frequencies.Add("samsung", 100);</br>
+            frequencies.Add("poco", 90);</br>
+            frequencies.Add("oppo", 40);</br>
+            IEnumerable<WordCloudEntry> wordEntries = frequencies.Select(p => new WordCloudEntry(p.Key, p.Value));
+</p>
+    <p>
+	    <strong>To set the font properties, use following lines:</strong></br>
+	     var wordCloud = new WordCloudInput(wordEntries)</br>
+            {</br>
+                Width = 1024,</br>
+                Height = 256,</br>
+                MinFontSize =70,</br>
+                MaxFontSize = 100</br>
+            };
+</p>
+<p>
+	<strong>To create the bitmap of wordcloud, add the following lines:</strong></br>
+	    //////////////////</br>
+            var sizer = new LogSizer(wordCloud);</br>
+             SkGraphicEngine engine = new SkGraphicEngine(sizer, wordCloud);</br>
+            var layout = new SpiralLayout(wordCloud);</br>
+            var colorizer = new RandomColorizer(); // optional</br>
+            var wcg = new WordCloudGenerator<SKBitmap>(wordCloud, engine, layout, colorizer);</br>
+            IEnumerable<(LayoutItem Item, double FontSize)> items = wcg.Arrange();</br>
+             var bitmap = new SKBitmap(wordCloud.Width, wordCloud.Height);</br>
+             var canvas = new SKCanvas(bitmap);</br>
+            // Draw on white background.</br>
+            canvas.Clear(SKColors.White);</br>
+            canvas.DrawBitmap(wcg.Draw(), 0, 0);</br>
+            ////////////////////////////////////
+</p>
+<p>
+	<strong>To save the image, perform the following rows:</strong></br>
+	  string location = "temp";</br>
+            var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);</br>
+            documentsPath = Path.Combine(documentsPath, "Orders", location);</br>
+            Directory.CreateDirectory(documentsPath);</br>
+            var data = bitmap.Encode(SKEncodedImageFormat.Png, 100);</br>
+             var writer = File.Create(documentsPath+"output.png");</br>
+            data.SaveTo(writer);</br>
+<strong>To show the image use following line to set the path of the image:</strong></br>
+resim.Source = documentsPath+"output.png";</br>
+<strong>To see the exact path of the image, use the following line:</strong></br>
+     Application.Current.MainPage.DisplayAlert("message", documentsPath.ToString(), "close");</br>
+#######################################</br>
+<strong>The full version of the wordcloud function.</srtong></br>
+##############################################</br>
+<img src="part1.png" alt="hi" class="inline"/>
+<img src="part2.png" alt="hi" class="inline"/></br>
+<img src="tel2.png" alt="hi" class="inline" />
+</p>
+</body>
+
+</html>
